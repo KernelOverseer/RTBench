@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractals.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abiri <abiri@student.42.fr>                +#+  +:+       +#+        */
+/*   By: abiri <abiri@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 18:54:44 by abiri             #+#    #+#             */
-/*   Updated: 2020/03/04 18:08:35 by abiri            ###   ########.fr       */
+/*   Updated: 2021/06/29 15:53:23 by abiri            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,8 @@ double		ft_fractal_intersection(t_cam *cam,
 		ft_normalise_vector(cam->ray_direction), distance));
 	color = ft_int_to_color(g_fractal_colors[(int)((double)status
 		* 20.0) % 193]);
-	ft_get_hit_info(ft_fractal_normal(pos, distance, fractal),
+	fractal->normal = (t_vector){0, 0, 0};
+	ft_get_hit_info((t_vector){0, 0, 0}/*ft_fractal_normal(pos, distance, fractal)*/,
 		(t_point *)fractal, cam);
 	if (cam->hit.soluces[0])
 		cam->hit.color = color;

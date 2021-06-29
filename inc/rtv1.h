@@ -6,7 +6,7 @@
 /*   By: abiri <abiri@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 16:13:19 by abiri             #+#    #+#             */
-/*   Updated: 2021/06/29 14:13:27 by abiri            ###   ########.fr       */
+/*   Updated: 2021/06/29 15:49:30 by abiri            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,9 +123,9 @@ typedef	u_int64_t uint64_t;
 */
 
 extern	pthread_mutex_t g_render_mutex;
-# define DEFAULT_CLUSTERS_X 36
-# define DEFAULT_CLUSTERS_Y 24
-# define NUM_THREAD 12
+# define DEFAULT_CLUSTERS_X 32
+# define DEFAULT_CLUSTERS_Y 20
+# define NUM_THREAD 256
 
 /*
 **	buttons macros

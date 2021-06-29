@@ -6,7 +6,7 @@
 /*   By: abiri <abiri@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/29 03:31:17 by abenaiss          #+#    #+#             */
-/*   Updated: 2021/06/29 14:16:50 by abiri            ###   ########.fr       */
+/*   Updated: 2021/06/29 16:17:23 by abiri            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static long long	calculate_score(t_rtv *rtv)
 		rtv->thread_manager.start_time.tv_sec) * 1000000 +
 		rtv->thread_manager.end_time.tv_usec - rtv->thread_manager.start_time.tv_usec);
 	
-	long long score = 100000000000L / duration;
+	long long score = 1000000000000L / duration;
 	return (score);
 }
 
@@ -74,6 +74,7 @@ static int	ft_frame_loop(void *arg)
 		rtv->thread_manager.idle_threads = 0;
 		gettimeofday(&rtv->thread_manager.end_time, NULL);
 		printf("your score is : %lld\n", calculate_score(rtv));
+		exit(0);
 	}
 	mlx_put_image_to_window(rtv->mlx.mlx_ptr, rtv->mlx.win,
 			rtv->mlx.img.img_ptr, 0, 0);
