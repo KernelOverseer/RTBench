@@ -1,0 +1,5 @@
+<scene ambiant="0.5" AA="1" resolution="720" light_samples="1"/>
+<camera position="(-4.50930, 0.000000, -1.10317)" lookat="(0, 0, 0)" fov="40"/>
+<llight center="(10, 5, 5)" intensity="0.5" color="#FFFFFF"/>
+<ssphere center="(0, 0, 0)" texture_mapping=":pastel" color="#ff00ff" radius="0.2"/>
+<fractal center="(0, 0, 0)" iterations="50" steps="50" power="5"/>
