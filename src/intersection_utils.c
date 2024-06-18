@@ -6,37 +6,11 @@
 /*   By: abiri <abiri@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 07:22:58 by abenaiss          #+#    #+#             */
-/*   Updated: 2021/06/28 17:53:28 by abiri            ###   ########.fr       */
+/*   Updated: 2024/06/18 15:45:30 by abiri            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
-
-// static void			ft_display_loading(t_rtv *rtv)
-// {
-// 	int x;
-// 	int y;
-// 	int	max;
-
-// 	y = rtv->scene.height - 5;
-// 	x = 0;
-// 	max = (double)rtv->scene.width - ((double)((rtv->render_y_offset)
-// 	* rtv->pixel_size + (rtv->render_offset)) / (double)(rtv->pixel_size
-// 	* rtv->pixel_size + rtv->pixel_size)) * (double)rtv->scene.width;
-// 	max = (max == rtv->scene.width) ? 0 : max;
-// 	while (x < max)
-// 	{
-// 		y = rtv->scene.height - 5;
-// 		while (y < rtv->scene.height)
-// 		{
-// 			if (x >= 0 && x < rtv->scene.width &&
-// 					y >= 0 && y < rtv->scene.height)
-// 				rtv->mlx.img.data[(int)(y * rtv->scene.width + x)] = 0xFF00FF;
-// 			y++;
-// 		}
-// 		x++;
-// 	}
-// }
 
 static t_rect				ft_get_thread_rect(t_threads_manager thread_info)
 {
@@ -58,8 +32,6 @@ static void			*ft_ray_loop(void *data)
 
 	rtv = data;
 	thread_rect = ft_get_thread_rect(rtv->thread_manager);
-	printf("RES : %d | %d\n", rtv->scene.width, rtv->scene.height);
-	printf("%d %d | %d %d\n", thread_rect.start_x, thread_rect.end_x, thread_rect.start_y, thread_rect.end_y);
 	rtv->column = thread_rect.start_y;
 	while (rtv->column < thread_rect.end_y)
 	{
@@ -70,14 +42,9 @@ static void			*ft_ray_loop(void *data)
 			if (rtv->scene.dof && rtv->options.depth_of_field)
 				ft_color_best_node_dof(rtv, rgb);
 			ft_color_best_node(rtv, rgb);
-			mlx_put_image_to_window(rtv->mlx.mlx_ptr, rtv->mlx.win,
-				rtv->mlx.img.img_ptr, 0, 0);
 			rtv->row++;//rtv->pixel_size;
 		}
 		rtv->column++;
-		//printf("\ec");
-		//printf("PROGRESS : %2.2f%%\n", ((double)g_rendered_pixels / (double)rtv->total_pixels) * 100.0);
-		// ft_display_loading(rtv);
 	}
 	printf("EXITED FROM THREAD %d\n", rtv->thread_index);
 	return (NULL);
@@ -90,6 +57,7 @@ int					ft_ray_shooter(t_rtv *rtv)
 	int			i;
 
 	i = -1;
+	ft_init_thread_manager(rtv);
 	printf("RENDERING WITH %d THREADS\n", NUM_THREAD);
 	while (++i < NUM_THREAD)
 	{

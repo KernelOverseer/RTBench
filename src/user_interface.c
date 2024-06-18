@@ -71,29 +71,3 @@ int			ft_click_buttons(int mouse_button, int x, int y, t_rtv *env)
 		ft_change_lookat(mouse_button, x, y, env);
 	return (0);
 }
-
-void		ft_load_interface(t_list_head *buttons, t_rtv *env)
-{
-	t_button	*button;
-
-	button = ft_new_button(ft_strdup("AA"), ft_button_toggle_boolean,
-		&env->options.anti_aliasing, (t_coor){0, 0});
-	env->buttons.push(&env->buttons, button);
-	button = ft_new_button(ft_strdup("DIFFUSE"), ft_button_toggle_boolean,
-		&env->options.diffuse, (t_coor){0, 20});
-	env->buttons.push(&env->buttons, button);
-	button = ft_new_button(ft_strdup("SPECULAR"), ft_button_toggle_boolean,
-		&env->options.specular, (t_coor){0, 40});
-	env->buttons.push(&env->buttons, button);
-	button = ft_new_button(ft_strdup("REFLECTION"), ft_button_toggle_boolean,
-		&env->options.reflection, (t_coor){0, 60});
-	env->buttons.push(&env->buttons, button);
-	button = ft_new_button(ft_strdup("REFRACTION"), ft_button_toggle_boolean,
-		&env->options.refraction, (t_coor){0, 80});
-	env->buttons.push(&env->buttons, button);
-	button = ft_new_button(ft_strdup("SOFT SHADOWS"), ft_button_toggle_boolean,
-		&env->options.soft_shadows, (t_coor){0, 100});
-	env->buttons.push(&env->buttons, button);
-	ft_toogle_dof(buttons, env);
-	ft_bottom_buttons(buttons, env);
-}

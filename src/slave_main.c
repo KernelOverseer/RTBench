@@ -39,7 +39,6 @@ void			ft_init_rt(t_xml_data *data, t_rtv *rtv)
 	ft_init_default_scene(&(rtv->scene));
 	ft_load_shapes(data, rtv);
 	ft_init_cam(&rtv->cam, *rtv);
-	ft_load_interface(&rtv->buttons, rtv);
 	ft_headless_raytracer(rtv, "dump_file.bmp");
 	while (1)
 		continue;

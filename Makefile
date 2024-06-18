@@ -18,7 +18,7 @@ _RED = \x1b[31m
 _BOLD = \x1b[1m
 _END = \x1b[0m
 CC = gcc
-NAME = rt
+NAME = rtbench
 SLAVE_NAME = slave_rt
 
 FILENAMES = basics_constructors.c\
@@ -69,7 +69,6 @@ FILENAMES = basics_constructors.c\
 			color_intersection.c\
 			mlx_managing.c\
 			bottom_buttons.c\
-			draw_buttons.c\
 			holo_cube.c\
 			complex_constructors.c\
 			xml_parser_tools.c \
@@ -101,7 +100,7 @@ SLAVE_OBJ = $(addprefix $(OBJ_DIR)/, $(SLAVE_RENDER_SRC:.c=.o))
 
 HEADER_FILES = $(addprefix $(INC_DIR)/, $(HEADER_FILE))
 
-FLAGS = -g -Wall -Werror -Wextra
+FLAGS = -g -Wall -Werror -Wextra -O3 -march=native -mtune=native -ffast-math -fomit-frame-pointer -funroll-loops -fno-strict-aliasing -fno-strict-overflow
 
 FTMATHS = ./libs/ft_maths
 
@@ -115,15 +114,15 @@ LIBTTSLISTDIR = ./libs/ttslist
 
 LIBTTSLIST = $(LIBTTSLISTDIR)/libttslist.a
 
-INCLUDES = -I ./inc -I $(LIBFTDIR) -I ./libs/ft_maths/inc -I $(LIBTTSLISTDIR)/includes -I ./libs/MinilibX/elcapitan
+INCLUDES = -I ./inc -I $(LIBFTDIR) -I ./libs/ft_maths/inc -I $(LIBTTSLISTDIR)/includes
 
 # detecting the os and linking with the good minilibx
 
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S), Linux)
-	LIBRARIES = -L $(LIBFTDIR) -lpthread -lft -L ./minilibx -lmlx -lX11 -lXext -L $(FTMATHS) -lftmaths -lm -L $(LIBTTSLISTDIR) -lttslist
+	LIBRARIES = -L $(LIBFTDIR) -lpthread -lft -L $(FTMATHS) -lftmaths -lm -L $(LIBTTSLISTDIR) -lttslist
 else
-	LIBRARIES = -L $(LIBFTDIR) -lft -L ./libs/MinilibX -lmlx -framework OpenGL -framework AppKit -L $(FTMATHS) -lftmaths -L $(LIBTTSLISTDIR) -lttslist
+	LIBRARIES = -L $(LIBFTDIR) -lft -L $(FTMATHS) -lftmaths -L $(LIBTTSLISTDIR) -lttslist
 endif
 
 DELAY = 0

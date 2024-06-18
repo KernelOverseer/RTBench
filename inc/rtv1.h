@@ -6,7 +6,7 @@
 /*   By: abiri <abiri@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 16:13:19 by abiri             #+#    #+#             */
-/*   Updated: 2021/06/29 15:49:30 by abiri            ###   ########.fr       */
+/*   Updated: 2024/06/18 15:54:38 by abiri            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "ttslist.h"
 # include "parser.h"
 # include "objects.h"
-# include <mlx.h>
 # include <sys/time.h>
 # include <sys/types.h>
 # include <sys/stat.h>
@@ -125,7 +124,7 @@ typedef	u_int64_t uint64_t;
 extern	pthread_mutex_t g_render_mutex;
 # define DEFAULT_CLUSTERS_X 32
 # define DEFAULT_CLUSTERS_Y 20
-# define NUM_THREAD 256
+# define NUM_THREAD 64
 
 /*
 **	buttons macros
@@ -556,7 +555,6 @@ t_texture				*ft_get_texture(char *filename, t_rtv *env);\
 /*
 **	Interface functions
 */
-void					ft_load_interface(t_list_head *buttons, t_rtv *env);
 void					ft_draw_buttons(t_rtv *env);
 int						ft_click_buttons(int mouse_button,
 	int x, int y, t_rtv *env);
@@ -631,4 +629,8 @@ void					ft_put_pixel(t_rtv *rtv, int color);
 int						ft_key_stroke(int key, t_rtv *rtv);
 void					ft_clear_mlx(t_mlx *mlx, t_rtv *rtv);
 int						ft_exit(t_rtv *rtv);
+/*
+** multithreading functions
+*/
+void		ft_init_thread_manager(t_rtv *rtv);
 #endif

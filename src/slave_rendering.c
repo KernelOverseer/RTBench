@@ -56,7 +56,8 @@ int				ft_headless_raytracer(t_rtv *rtv, char *filename)
 	ft_init_headless_renderer(rtv);
 	ft_init_rendering_image(rtv);
 	ft_ray_shooter(rtv);
-	ft_send_final_image(rtv);
+	// REMOVED : for cluster rendering
+	// ft_send_final_image(rtv);
 	ft_save_bitmap(&rtv->mlx.img, filename);
 	return (SUCCESS);
 }
