@@ -4,19 +4,26 @@ import math
 import time
 from os.path import isfile, join
 
-exec_path = "/Users/abiri/goinfre/RTBenchStandalone/rt"
-save_path = "/Users/abiri/goinfre/RT/scripts/"
+exec_path = "/Users/abiri/goinfre/RTBenchStandalone/rtbench"
+save_path = "/Users/abiri/goinfre/RTBenchStandalone/scripts/"
 keep_frames = True
-#frame_count = 240
-frame_count = 48
+frame_count = 480
+#frame_count = 120
 frames_per_second = 24
-resolution = 100
+resolution = 1080
 resume_from_frame = 0
 rendered_files = []
 
 ###################################################
 #            SCENE GENERATION FUNCTION            #
 ###################################################
+
+def smooth_in_out(index):
+    t = index / frame_count
+    if t < 1:
+        return frame_count * (t * t * (3.0 - 2.0 * t))  # Smooth in-out transition
+    else:
+        return frame_count * (1.0 - ((t - 1.0) * (t - 1.0) * (3.0 - 2.0 * (t - 1.0))))  # Smooth in-out transition
 
 def generate_rotary_camera(index, center=(0, 0, 0), radius=5.0, rotation=0.5, rotation_offset=0, y=0):
     scene = '''<scene ambiant="0.8" AA="4" resolution="%d" light_samples="1" refraction_depth="1" reflection_depth="1"/>
@@ -32,7 +39,8 @@ def generate_rotary_camera(index, center=(0, 0, 0), radius=5.0, rotation=0.5, ro
 def generate_evolutionary_fractal_camera(index, center=(0, 0, 0), radius=5.0, rotation=0.5, rotation_offset=0, y=0, min_steps=0, max_steps=50):
     scene = '''<scene ambiant="0.7" AA="1" resolution="%d" light_samples="1" refraction_depth="1" reflection_depth="1"/>
     <camera position="(%f, %f, %f)" lookat="(%f, %f, %f)" fov="40"/>
-    <fractal center="(1, 1, 1)" color="#FF00FF" iterations="200" steps="%d" power="3"/>\n'''
+    <fractal center="(1, 1, 1)" color="#FF00FF" iterations="200" steps="%d" power="10"/>\n'''
+    index = smooth_in_out(index)
     step = min_steps + (index / frame_count) * (max_steps - min_steps)
     angle = ((index / frame_count) * (rotation * 2.0 * math.pi)) - rotation_offset * 2.0 * math.pi
     radius += (index/frame_count) * 2
@@ -119,7 +127,7 @@ def main():
         # SCENE GENERATION FUNCTION v
         #scene = generate_rotary_camera(index, center=(0, 1, 0), radius=30, rotation=0.25, rotation_offset=0.2)
         #scene = generate_spiral_camera(index, center=(0, 15.18, 18.79), radius=30, rotation=0.25, rotation_offset=0.2)
-        scene = generate_evolutionary_fractal_camera(index, center=(1, 1, 1), radius=0.3, rotation=1, rotation_offset=0, min_steps=0, max_steps=50)
+        scene = generate_evolutionary_fractal_camera(index, center=(1, 1, 1), radius=0.3, rotation=0.5, rotation_offset=0, min_steps=0, max_steps=50)
         # SCENE GENERATION FUNCTION ^
         render_current_scene(scene, index)
     convert_frames_to_video()
