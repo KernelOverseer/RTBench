@@ -100,7 +100,7 @@ SLAVE_OBJ = $(addprefix $(OBJ_DIR)/, $(SLAVE_RENDER_SRC:.c=.o))
 
 HEADER_FILES = $(addprefix $(INC_DIR)/, $(HEADER_FILE))
 
-FLAGS = -g -Wall -Werror -Wextra -O3 -march=native -mtune=native -ffast-math -fomit-frame-pointer -funroll-loops -fno-strict-aliasing -fno-strict-overflow
+#FLAGS = -g -Wall -Werror -Wextra -O3 -march=native -mtune=native -ffast-math -fomit-frame-pointer -funroll-loops -fno-strict-aliasing -fno-strict-overflow
 
 FTMATHS = ./libs/ft_maths
 

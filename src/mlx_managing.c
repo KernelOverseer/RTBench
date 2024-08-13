@@ -29,6 +29,7 @@ static t_rect				ft_get_thread_rect(t_threads_manager thread_info)
 {
 	t_rect	result;
 
+	printf("%d/%d\n", thread_info.in_thread_index, thread_info.num_clusters);
 	result.start_y = (thread_info.in_thread_index / (DEFAULT_CLUSTERS_X)) * thread_info.cluster_height;
 	result.start_x = (thread_info.in_thread_index % DEFAULT_CLUSTERS_X) * thread_info.cluster_width;
 	result.end_x = result.start_x + thread_info.cluster_width;
